@@ -3,23 +3,29 @@ window.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Nav oculto al inicio
-gsap.set(".topbar", {
-  y: -10,
-  opacity: 0
-});
+  gsap.set(".topbar", {
+    y: -10,
+    opacity: 0
+  });
 
-ScrollTrigger.create({
-  start: "top top",
-  trigger: "#Reel",
+  ScrollTrigger.create({
+    start: "top top",
+    trigger: "#Reel",
 
-  onEnter: () => {
-    gsap.to(".topbar", { y: -0, opacity: 1 });
-  },
+    onEnter: () => {
+      gsap.to(".topbar", {
+        y: -0,
+        opacity: 1
+      });
+    },
 
-  onLeaveBack: () => {
-    gsap.to(".topbar", { y: -10, opacity: 0 });
-  }
-});
+    onLeaveBack: () => {
+      gsap.to(".topbar", {
+        y: -10,
+        opacity: 0
+      });
+    }
+  });
 
   const intro = document.querySelector(".intro");
 
@@ -48,6 +54,9 @@ ScrollTrigger.create({
     document.body.style.overflow = "auto";
   });
 
+  document.documentElement.clientWidth
+  document.body.scrollWidth
+
   // 🔥 función reutilizable (clave)
   function createTunnel(sceneSelector) {
 
@@ -59,9 +68,17 @@ ScrollTrigger.create({
 
       const direction = (i % 2 === 0) ? 1 : -1;
 
-      // 👉 control manual (podés editar esto)
-      const x = (1150 + i * 80) * direction;
-      const y = (i % 2 === 0) ? -80 : 80;
+      const isMobile = window.innerWidth <= 768;
+      window.innerWidth
+
+      const x = isMobile ?
+        (700 + i * 60) * direction :
+        (window.innerWidth * 1.2 + i * 120) * direction;
+
+      const y = isMobile ?
+        ((i % 2 === 0) ? -50 : 50) :
+        ((i % 2 === 0) ? -99 : 99);
+
       const scale = 1.2 + (i * 0.05);
 
       const tl = gsap.timeline({
@@ -77,7 +94,7 @@ ScrollTrigger.create({
       tl.fromTo(img,
 
         {
-          opacity: 1,
+          opacity: 0,
           scale: 0,
           x: 0,
           y: 0
@@ -115,34 +132,34 @@ ScrollTrigger.create({
   createTunnel("#scene1");
   createTunnel("#Laburos");
 
-const slider = document.getElementById("slider");
+  const slider = document.getElementById("slider");
 
-document.getElementById("next").addEventListener("click", () => {
-  slider.classList.add("move");
-});
+  document.getElementById("next").addEventListener("click", () => {
+    slider.classList.add("move");
+  });
 
-document.getElementById("back").addEventListener("click", () => {
-  slider.classList.remove("move");
-});
+  document.getElementById("back").addEventListener("click", () => {
+    slider.classList.remove("move");
+  });
 
-const toggle = document.getElementById("toggle");
-const Hb1 = document.getElementById("b1");
-const Hb2 = document.getElementById("b2");
-const Hb3 = document.getElementById("b3");
-const Hb4 = document.getElementById("b4");
+  const toggle = document.getElementById("toggle");
+  const Hb1 = document.getElementById("b1");
+  const Hb2 = document.getElementById("b2");
+  const Hb3 = document.getElementById("b3");
+  const Hb4 = document.getElementById("b4");
 
-toggle.addEventListener("click", () => {
-  Hb1.classList.toggle("show");
-  Hb2.classList.toggle("show");
-  Hb3.classList.toggle("show");
-  Hb4.classList.toggle("show");
+  toggle.addEventListener("click", () => {
+    Hb1.classList.toggle("show");
+    Hb2.classList.toggle("show");
+    Hb3.classList.toggle("show");
+    Hb4.classList.toggle("show");
 
-  toggle.src = toggle.src.includes("icon-mas.png")
-    ? "img/icon-menos.png"
-    : "img/icon-mas.png";
-});
+    toggle.src = toggle.src.includes("icon-mas.png") ?
+      "img/icon-menos.png" :
+      "img/icon-mas.png";
+  });
 
-// 🔥 IMPORTANTE: recalcular todo cuando carga
+  // 🔥 IMPORTANTE: recalcular todo cuando carga
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();
   });
