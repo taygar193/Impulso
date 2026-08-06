@@ -201,6 +201,8 @@ const closePopup =
 const galleryScroll =
   document.querySelector(".gallery-scroll");
 
+const popupLink =
+  document.querySelector(".popup-link");
 // =========================
 // ABRIR POPUP
 // =========================
@@ -210,8 +212,17 @@ slides.forEach(slide => {
   slide.addEventListener("click", () => {
 
     // titulo
-    popupTitle.textContent =
-      slide.dataset.title;
+    popupTitle.textContent = slide.dataset.title;
+
+    // enlace
+    const url = slide.dataset.url;
+
+    if (url) {
+      popupLink.href = url;
+      popupLink.style.display = "inline-flex";
+    } else {
+      popupLink.style.display = "none";
+    }
 
     // galeria
     const gallery =
@@ -365,13 +376,13 @@ const params = new URLSearchParams(window.location.search);
 
 const categoryFromUrl = params.get("cat");
 
-if(categoryFromUrl){
+if (categoryFromUrl) {
 
   const button = document.querySelector(
     `.cat[data-filter="${categoryFromUrl}"]`
   );
 
-  if(button){
+  if (button) {
     button.click();
   }
 
