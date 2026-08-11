@@ -391,6 +391,21 @@ POPUP
   display:none;
 }
 
+.popup-gallery video{
+  height:100%;
+  width:auto;
+  max-width:90%;
+  object-fit:contain;
+
+  flex-shrink:0;
+
+  border-radius:20px;
+
+  scroll-snap-align:center;
+
+  user-select:none;
+}
+
 .popup-gallery.video-only{
   overflow-x:hidden;
   width:100%;
@@ -398,11 +413,15 @@ POPUP
 }
 
 .popup-gallery.video-only video{
+  width:auto;
+  height:100%;
   max-width:90%;
   max-height:100%;
-  width:auto;
-  height:auto;
-  border-radius: 20px;
+
+  object-fit:contain;
+
+  border-radius:20px;
+  flex-shrink:0;
 }
 
 /* imagenes */
@@ -507,82 +526,4 @@ RANGE
   border:4px solid black;
 
   cursor:pointer;
-}
-
-@media (max-width:768px){
-
-  .topbar{
-    flex-direction:column;
-    gap:15px;
-  }
-
-  .logo{
-    padding:0;
-  }
-
-  .logo img{
-    width:120px;
-  }
-
-  nav{
-    padding:0;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-  nav a{
-    font-size:14px;
-  }
-
-  .title{
-    font-size:3rem;
-    text-align:center;
-  }
-
-  .categories{
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-  }
-
-  .cat{
-    font-size:14px;
-    padding:10px 15px;
-  }
-
-  .slide{
-    width:85vw;
-    height:auto;
-    aspect-ratio:16/10;
-  }
-
-  .arrow{
-    width:50px;
-    height:50px;
-    font-size:20px;
-  }
-
-  .left{
-    left:10px;
-  }
-
-  .right{
-    right:10px;
-  }
-
-  .back-btn img{
-    width:35px;
-  }
-
-  .popup-content{
-    width:95%;
-    height:90vh;
-    padding:15px;
-  }
-
-  .popup-title{
-    font-size:2.5rem;
-  }
-
 }
